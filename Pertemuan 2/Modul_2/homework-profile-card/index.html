@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Interactive Profile Card</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <!-- Kontrol Tema Global -->
+    <header class="top-bar">
+      <button id="toggle-tema" type="button" aria-pressed="false">Ganti Tema</button>
+    </header>
+
+    <!-- State Pesan & Tombol Coba Lagi -->
+    <section id="status-container" class="status-box">
+      <p id="status" class="status-pesan" role="status" aria-live="polite">Memuat profil...</p>
+      <button id="coba-lagi" type="button" hidden>Coba Lagi</button>
+    </section>
+
+    <!-- Kartu Profil Utama -->
+    <article id="profile-card" class="card" hidden>
+      <div class="card-header">
+        <h1 id="profil-nama">Nama Pengguna</h1>
+        <p id="profil-peran" class="peran">Peran / Profesi</p>
+      </div>
+
+      <!-- Toggle Detail Profil -->
+      <div class="card-actions">
+        <button id="toggle-detail" type="button" aria-expanded="false" aria-controls="profil-detail">
+          Lihat Detail
+        </button>
+      </div>
+
+      <div id="profil-detail" class="detail-box is-collapsed" hidden>
+        <p><strong>Bio:</strong> <span id="profil-bio">-</span></p>
+        <p><strong>Kontak:</strong> <span id="profil-kontak">-</span></p>
+      </div>
+
+      <!-- Manajemen Keterampilan -->
+      <section class="skills-section" aria-labelledby="judul-skill">
+        <h2 id="judul-skill">Daftar Keterampilan</h2>
+
+        <form id="form-skill" novalidate>
+          <label for="input-skill">Tambah keterampilan baru:</label>
+          <div class="form-row">
+            <input id="input-skill" name="skill" type="text" placeholder="Contoh: REST API" autocomplete="off" aria-describedby="error-skill">
+            <button type="submit" id="btn-tambah-skill">Tambah</button>
+          </div>
+          <small id="error-skill" class="error-msg" aria-live="polite"></small>
+        </form>
+
+        <p id="empty-skill-msg" class="empty-text" hidden>Belum ada keterampilan yang terdaftar.</p>
+        <ul id="daftar-skill" class="skill-list" aria-label="Daftar keahlian"></ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

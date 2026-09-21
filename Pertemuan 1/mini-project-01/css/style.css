@@ -1,0 +1,235 @@
+/* ===================================================
+   KODE ASLI MODUL 1 ANDA (TETAP DIPERTAHANKAN UTUH)
+   =================================================== */
+
+/* 1. Tokens */
+:root {
+  --color-primary: #2457d6;
+  --color-primary-dark: #193ca0;
+  --color-bg: #f8fafc;
+  --color-card-bg: #ffffff;
+  --color-text: #1f2937;
+  --space-base: 16px;
+  --font-main: Arial, sans-serif;
+}
+
+/* 2. Box Model & Basic Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 3. Typography & Global Styles */
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+h1, h2, p, ul, ol {
+  margin-bottom: var(--space-base);
+}
+
+ul, ol {
+  padding-left: 24px;
+}
+
+/* 4. Layout Container */
+.container {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: var(--space-base);
+}
+
+/* 5. Component Styles */
+.header {
+  background-color: var(--color-card-bg);
+  padding: calc(var(--space-base) * 1.5);
+  border-bottom: 1px solid #dbe2ea;
+  margin-bottom: calc(var(--space-base) * 1.5);
+}
+
+.footer {
+  background-color: var(--color-card-bg);
+  padding: calc(var(--space-base) * 1.5);
+  border-top: 1px solid #dbe2ea;
+  text-align: center;
+  margin-top: calc(var(--space-base) * 2);
+}
+
+/* Navigasi Flexbox */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-base);
+}
+
+.nav a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Susunan Card Mobile-First */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-base) * 1.5);
+}
+
+.card {
+  background-color: var(--color-card-bg);
+  padding: calc(var(--space-base) * 1.5);
+  border: 1px solid #dbe2ea;
+  border-radius: 8px;
+  flex: 1 1 100%;
+}
+
+.profile-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* 6. Interaksi & Aksesibilitas */
+.button {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}
+
+.button:hover {
+  background-color: var(--color-primary-dark);
+}
+
+a:focus-visible, .button:focus-visible {
+  outline: 3px solid #f4b000;
+  outline-offset: 3px;
+}
+
+/* 7. Breakpoint Desktop / Tablet */
+@media (min-width: 768px) {
+  .card-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    flex-basis: calc(50% - 12px);
+  }
+}
+
+/* Fitur 7: Tema Gelap */
+body.dark-theme {
+  --color-bg: #0f172a;
+  --color-card-bg: #1e293b;
+  --color-text: #f8fafc;
+}
+body.dark-theme .card,
+body.dark-theme .header {
+  border-color: #334155;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Fitur 1: Navigasi Mobile */
+.btn-menu {
+  display: block;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+}
+@media (max-width: 767px) {
+  .nav {
+    display: none;
+    flex-direction: column;
+  }
+  .nav.is-open {
+    display: flex;
+  }
+}
+@media (min-width: 768px) {
+  .btn-menu {
+    display: none; /* Sembunyikan tombol menu di desktop */
+  }
+}
+
+/* Fitur 2 & 3: Layanan & Filter */
+.layanan-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+.layanan-item {
+  border: 1px solid #dbe2ea;
+  padding: 12px;
+  border-radius: 6px;
+}
+
+/* Fitur 4: FAQ */
+.faq-item {
+  margin-bottom: 8px;
+}
+.faq-btn {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  background: none;
+  border: 1px solid #dbe2ea;
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: bold;
+  color: inherit;
+}
+.faq-jawaban {
+  padding: 8px 12px;
+}
+
+/* Fitur 5: Form Kontak */
+input {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #dbe2ea;
+  border-radius: 4px;
+}
+input[aria-invalid="true"] {
+  border-color: #dc2626;
+  outline: 2px solid #dc2626;
+}
+.error-msg {
+  color: #dc2626;
+  display: block;
+  min-height: 18px;
+  margin-bottom: 8px;
+}
+.status-sukses {
+  color: #16a34a;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Fitur 6: Tombol Kembali ke Atas */
+.btn-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 14px;
+  border-radius: 50px;
+  z-index: 99;
+}

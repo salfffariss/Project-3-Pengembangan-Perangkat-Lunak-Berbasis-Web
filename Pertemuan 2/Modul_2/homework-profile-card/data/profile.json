@@ -1,0 +1,11 @@
+{
+  "nama": "Salman Alfarisi Firdaus",
+  "peran": "Mahasiswa D3 Teknik Informatika",
+  "bio": "Fokus pada pengembangan web frontend, arsitektur DOM semantik, dan interaktivitas JavaScript modern.",
+  "kontak": "salman@example.com",
+  "keterampilan": [
+    "HTML5 & CSS3 Flexbox",
+    "Vanilla JavaScript",
+    "Git & GitHub Version Control"
+  ]
+}

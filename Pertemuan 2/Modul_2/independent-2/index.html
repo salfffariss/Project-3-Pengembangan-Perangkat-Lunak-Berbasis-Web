@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAQ Accordion</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Frequently Asked Questions</h1>
+    <div class="faq-accordion">
+      <!-- Item 1 -->
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-ans-1">
+            Apa itu JavaScript Vanilla?
+          </button>
+        </h3>
+        <div id="faq-ans-1" class="faq-content" hidden>
+          <p>JavaScript Vanilla adalah JavaScript murni tanpa menggunakan library atau framework eksternal seperti jQuery atau React.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-ans-2">
+            Mengapa menggunakan addEventListener?
+          </button>
+        </h3>
+        <div id="faq-ans-2" class="faq-content" hidden>
+          <p>addEventListener memisahkan struktur HTML dari logika JavaScript serta memungkinkan penambahan beberapa handler pada satu elemen.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-ans-3">
+            Apa peran atribut aria-expanded?
+          </button>
+        </h3>
+        <div id="faq-ans-3" class="faq-content" hidden>
+          <p>Atribut aria-expanded menginformasikan pembaca layar (screen reader) apakah konten jawaban sedang terbuka (true) atau tertutup (false).</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

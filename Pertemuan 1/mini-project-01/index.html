@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil Mahasiswa JTK</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-top">
+        <h1>Program Studi JTK</h1>
+        <button id="theme-btn" type="button" class="button">Tema Gelap</button>
+      </div>
+      <p>
+        Informasi resmi mengenai jurusan dan program studi Teknik Informatika.
+      </p>
+
+      <button id="menu-btn" type="button" class="button btn-menu" aria-expanded="false" aria-controls="main-nav">
+        Menu Navigasi
+      </button>
+
+      <nav id="main-nav" class="nav">
+        <a href="#prodi">Prodi</a>
+        <a href="#visi-misi">Visi misi</a>
+        <a href="#alur-pendaftaran">Alur pendaftaran</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <div class="card-list">
+        <section id="prodi" class="card">
+          <h2>Prodi</h2>
+          <ul>
+            <li>D3 Teknik Informatika</li>
+            <li>D4 Teknik Informatika</li>
+          </ul>
+          <img
+            src="assets/Mahasiswa.jpg"
+            alt="Foto Mahasiswa jtk yang sedang belajar"
+            class="profile-img"
+          >
+        </section>
+
+        <section id="visi-misi" class="card">
+          <h2>Visi misi</h2>
+          <ol>
+            <li>
+              Menyelenggarakan pendidikan tinggi vokasi yang berkualitas untuk
+              menghasilkan lulusan yang kompeten, berkarakter, berjiwa
+              wirausaha, berwawasan lingkungan, dan siap bersaing secara global.
+            </li>
+            <li>
+              Mengembangkan kegiatan penelitian berbasis produk dan jasa di
+              bidang Informatika yang bermanfaat bagi masyarakat dan industri.
+            </li>
+            <li>
+              Meningkatkan pengabdian kepada masyarakat melalui pemanfaatan
+              teknologi informasi yang relevan dan berdampak nyata
+            </li>
+            <li>
+              Memperkuat jejaring dan kerja sama strategis dengan dunia usaha,
+              dunia industri, dan pemerintah dalam pengembangan pendidikan dan
+              teknologi informasi
+            </li>
+            <li>
+              Mewujudkan tata kelola organisasi yang profesional, akuntabel, dan
+              berorientasi pada perbaikan berkelanjutan
+            </li>
+          </ol>
+        </section>
+
+        <section id="alur-pendaftaran" class="card">
+          <h2>Alur pendaftaran</h2>
+          <ol>
+            <li>SNBP</li>
+            <li>UTBK</li>
+            <li>MANDIRI</li>
+          </ol>
+          <a class="button">Informasi lainnya</a>
+        </section>
+
+        <section id="layanan" class="card">
+          <h2>Layanan Mahasiswa</h2>
+          <label for="filter-layanan">Filter Kategori: </label>
+          <select id="filter-layanan">
+            <option value="semua">Semua</option>
+            <option value="Akademik">Akademik</option>
+            <option value="Fasilitas">Fasilitas</option>
+          </select>
+          <div id="daftar-layanan" class="layanan-container"></div>
+        </section>
+
+        <section id="faq" class="card">
+          <h2>FAQ</h2>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-1">Apa itu JTK?</button></h3>
+            <p id="faq-1" class="faq-jawaban" hidden>Jurusan Teknik Komputer dan Informatika di POLBAN.</p>
+          </div>
+          <div class="faq-item">
+            <h3><button type="button" class="faq-btn" aria-expanded="false" aria-controls="faq-2">Berapa lama masa studi?</button></h3>
+            <p id="faq-2" class="faq-jawaban" hidden>D3 ditempuh dalam 3 tahun dan D4 dalam 4 tahun.</p>
+          </div>
+        </section>
+
+        <section id="kontak" class="card">
+          <h2>Kontak</h2>
+          <p>
+            Punya pertanyaan lebih lanjut? Jangan ragu untuk menghubungi kami.
+          </p>
+          <form id="form-kontak" novalidate>
+            <label for="nama">Nama:</label>
+            <input id="nama" type="text" placeholder="Nama Anda">
+            <small id="error-nama" class="error-msg"></small>
+
+            <label for="email">Email:</label>
+            <input id="email" type="email" placeholder="nama@email.com">
+            <small id="error-email" class="error-msg"></small>
+
+            <button type="submit" class="button">Kirim Pesan</button>
+          </form>
+          <p id="status-kontak" class="status-sukses"></p>
+        </section>
+      </div>
+    </main>
+
+    <button id="btn-top" type="button" class="button btn-top" aria-label="Kembali ke atas">↑ Ke Atas</button>
+  </body>
+</html>
