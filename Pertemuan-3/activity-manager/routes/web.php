@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\ActivityController; // <-- BARIS INI WAJIB ADA
+use App\Http\Controllers\ActivityController;
 use Illuminate\Support\Facades\Route;
 
-// Redirect halaman utama ke daftar kegiatan
 Route::get('/', function () {
-    return redirect('/activities');
+    return redirect()->route('activities.index');
 });
 
-// Route daftar dan detail
-Route::get('/activities', [ActivityController::class, 'index'])->name('activities.index');
-Route::get('/activities/{activity}', [ActivityController::class, 'show'])->name('activities.show');
+// Menangani otomatis 7 rute CRUD (index, create, store, show, edit, update, destroy)
+Route::resource('activities', ActivityController::class);

@@ -1,15 +1,14 @@
-{{-- 1. Mengambil kerangka dasar dari layouts/app.blade.php --}}
 @extends('layouts.app')
 
-{{-- 2. Memasukkan konten ini ke dalam @yield('content') --}}
 @section('content')
-    <h1>Daftar Kegiatan</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h1>Daftar Kegiatan</h1>
+        <a href="{{ route('activities.create') }}" class="btn">+ Tambah Kegiatan</a>
+    </div>
 
-    {{-- Perulangan menampilkan seluruh data kegiatan --}}
     @forelse ($activities as $activity)
         <article class="card">
             <h2>
-                {{-- Klik judul akan membuka halaman detail kegiatan tersebut --}}
                 <a href="{{ route('activities.show', $activity) }}">
                     {{ $activity->title }}
                 </a>
@@ -19,7 +18,6 @@
             <span class="badge">Status: {{ $activity->status }}</span>
         </article>
     @empty
-        {{-- Tampil hanya jika database masih kosong --}}
         <p>Belum ada kegiatan yang terdaftar.</p>
     @endforelse
 @endsection
