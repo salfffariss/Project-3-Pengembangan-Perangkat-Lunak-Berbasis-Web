@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request; // Pastikan Request diimpor
 use App\Models\Activity;
 use App\Services\ActivityService; // <-- 1. Impor Service Class
 use App\Http\Requests\StoreActivityRequest;
@@ -12,11 +13,23 @@ use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
-    public function index(): View
-    {
-        $activities = Activity::query()->orderBy('activity_date', 'asc')->get();
-        return view('activities.index', compact('activities'));
-    }
+    public function index(Request $request): View
+{
+    // Daftar status yang sah
+    $validStatuses = ['Planned', 'Ongoing', 'Done'];
+    $statusFilter = $request->query('status');
+
+    // Query data kegiatan
+    $activities = Activity::query()
+        // Gunakan when(): jika filter ada dan valid, tambahkan filter status
+        ->when(in_array($statusFilter, $validStatuses, true), function ($query) use ($statusFilter) {
+            $query->where('status', $statusFilter);
+        })
+        ->orderBy('activity_date', 'asc')
+        ->get();
+
+    return view('activities.index', compact('activities', 'statusFilter'));
+}
 
     public function create(): View
     {
