@@ -2,34 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; // Pastikan Request diimpor
-use App\Models\Activity;
-use App\Services\ActivityService; // <-- 1. Impor Service Class
-use App\Http\Requests\StoreActivityRequest;
+use App\Http\Requests\StoreActivityRequest; // Pastikan Request diimpor
 use App\Http\Requests\UpdateActivityRequest;
-use DomainException; // <-- 2. Impor DomainException
-use Illuminate\Http\RedirectResponse;
+use App\Models\Activity; // <-- 1. Impor Service Class
+use App\Services\ActivityService;
+use DomainException;
+use Illuminate\Http\RedirectResponse; // <-- 2. Impor DomainException
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
     public function index(Request $request): View
-{
-    // Daftar status yang sah
-    $validStatuses = ['Planned', 'Ongoing', 'Done'];
-    $statusFilter = $request->query('status');
+    {
+        $activities = Activity::query()
+            ->filterStatus($request->query('status'))
+            ->orderBy('activity_date', 'asc')
+            ->get();
 
-    // Query data kegiatan
-    $activities = Activity::query()
-        // Gunakan when(): jika filter ada dan valid, tambahkan filter status
-        ->when(in_array($statusFilter, $validStatuses, true), function ($query) use ($statusFilter) {
-            $query->where('status', $statusFilter);
-        })
-        ->orderBy('activity_date', 'asc')
-        ->get();
-
-    return view('activities.index', compact('activities', 'statusFilter'));
-}
+        return view('activities.index', compact('activities'));
+    }
 
     public function create(): View
     {

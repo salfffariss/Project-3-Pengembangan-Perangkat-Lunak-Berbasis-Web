@@ -14,7 +14,7 @@ class ActivityService
     private const TRANSITIONS = [
         'Planned' => ['Planned', 'Ongoing'],
         'Ongoing' => ['Ongoing', 'Done'],
-        'Done'    => ['Done'],
+        'Done' => ['Done'],
     ];
 
     /**
