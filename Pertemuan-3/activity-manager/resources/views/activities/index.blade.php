@@ -27,11 +27,11 @@
         <article class="card">
             <h2>
                 <a href="{{ route('activities.show', $activity) }}">
-                    {{ $activity->title }}
+                    <span style="color: #2563eb; font-size: 0.9rem;">[{{ $activity->code }}]</span> {{ $activity->title }}
                 </a>
             </h2>
             <p><strong>Tanggal:</strong> {{ $activity->activity_date->format('d M Y') }}</p>
-            <p><strong>Kategori:</strong> {{ $activity->category }}</p>
+            <p><strong>Kategori:</strong> {{ $activity->category?->name ?? '-' }}</p>
             <span class="badge">Status: {{ $activity->status }}</span>
         </article>
     @empty

@@ -19,12 +19,22 @@
         input, textarea, select { width: 100%; padding: 8px 10px; border: 1px solid #d1d5db; border-radius: 6px; font: inherit; }
         .error { color: #dc2626; font-size: 0.85rem; margin-top: 4px; }
         .alert-success { background: #dcfce7; color: #166534; padding: 12px; border-radius: 6px; margin-bottom: 16px; }
+        .alert-danger { background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 6px; margin-bottom: 16px; }
     </style>
 </head>
 <body>
     <main class="container">
+        <nav style="display: flex; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #d1d5db;">
+            <a href="{{ route('activities.index') }}" style="{{ request()->routeIs('activities.*') ? 'text-decoration: underline;' : '' }}">📋 Daftar Kegiatan</a>
+            <a href="{{ route('categories.index') }}" style="{{ request()->routeIs('categories.*') ? 'text-decoration: underline;' : '' }}">🏷️ Master Kategori</a>
+        </nav>
+
         @if (session('success'))
             <div class="alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert-danger">{{ session('error') }}</div>
         @endif
 
         @yield('content')

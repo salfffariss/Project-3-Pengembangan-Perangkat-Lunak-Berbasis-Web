@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreActivityRequest; // Pastikan Request diimpor
 use App\Http\Requests\UpdateActivityRequest;
-use App\Models\Activity; // <-- 1. Impor Service Class
+use App\Models\Activity;
+use App\Models\Category;
 use App\Services\ActivityService;
 use DomainException;
-use Illuminate\Http\RedirectResponse; // <-- 2. Impor DomainException
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -25,12 +26,14 @@ class ActivityController extends Controller
 
     public function create(): View
     {
-        return view('activities.create');
+        $categories = Category::orderBy('name')->get();
+
+        return view('activities.create', compact('categories'));
     }
 
     public function store(
         StoreActivityRequest $request,
-        ActivityService $service // Gunakan service untuk membuat data
+        ActivityService $service
     ): RedirectResponse {
         $activity = $service->create($request->validated());
 
@@ -45,7 +48,9 @@ class ActivityController extends Controller
 
     public function edit(Activity $activity): View
     {
-        return view('activities.edit', compact('activity'));
+        $categories = Category::orderBy('name')->get();
+
+        return view('activities.edit', compact('activity', 'categories'));
     }
 
     public function update(

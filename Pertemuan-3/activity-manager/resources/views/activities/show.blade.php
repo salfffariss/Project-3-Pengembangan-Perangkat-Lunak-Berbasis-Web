@@ -4,9 +4,12 @@
     <p><a href="{{ route('activities.index') }}">← Kembali ke Daftar Kegiatan</a></p>
 
     <article class="card">
-        <h1>{{ $activity->title }}</h1>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <h1>{{ $activity->title }}</h1>
+            <span class="badge" style="background: #dbeafe; color: #1e40af; font-size: 0.95rem;">Kode: {{ $activity->code }}</span>
+        </div>
         <p><strong>Tanggal:</strong> {{ $activity->activity_date->format('d M Y') }}</p>
-        <p><strong>Kategori:</strong> {{ $activity->category }}</p>
+        <p><strong>Kategori:</strong> {{ $activity->category?->name ?? '-' }}</p>
         <p><strong>Status:</strong> <span class="badge">{{ $activity->status }}</span></p>
         
         <h3>Deskripsi:</h3>

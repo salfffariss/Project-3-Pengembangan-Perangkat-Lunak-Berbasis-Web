@@ -1,4 +1,12 @@
 <div class="form-group">
+    <label for="code">Kode Kegiatan</label>
+    <input id="code" name="code" type="text" value="{{ old('code', $activity->code ?? '') }}" placeholder="Contoh: ACT-001">
+    @error('code')
+        <p class="error">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="form-group">
     <label for="title">Judul Kegiatan</label>
     <input id="title" name="title" type="text" value="{{ old('title', $activity->title ?? '') }}">
     @error('title')
@@ -7,9 +15,16 @@
 </div>
 
 <div class="form-group">
-    <label for="category">Kategori</label>
-    <input id="category" name="category" type="text" value="{{ old('category', $activity->category ?? '') }}">
-    @error('category')
+    <label for="category_id">Kategori</label>
+    <select id="category_id" name="category_id">
+        <option value="">-- Pilih Kategori --</option>
+        @foreach ($categories as $cat)
+            <option value="{{ $cat->id }}" @selected(old('category_id', $activity->category_id ?? '') == $cat->id)>
+                {{ $cat->name }}
+            </option>
+        @endforeach
+    </select>
+    @error('category_id')
         <p class="error">{{ $message }}</p>
     @enderror
 </div>
