@@ -28,15 +28,18 @@ class Task1RelationalIntegrityTest extends TestCase
             'code' => 'ACT-NEW-01',
             'title' => 'Kegiatan Baru Valid',
             'description' => 'Deskripsi kegiatan valid.',
-            'activity_date' => '2026-10-15',
+            'start_at' => '2026-10-15',
+            'end_at' => '2026-10-16',
+            'capacity' => 50,
+            'location' => 'Lab 1',
             'category_id' => $category->id,
-            'status' => 'Planned',
         ]);
 
         $response->assertRedirect();
         $this->assertDatabaseHas('activities', [
             'code' => 'ACT-NEW-01',
             'category_id' => $category->id,
+            'status' => 'draft',
         ]);
 
         $activity = Activity::where('code', 'ACT-NEW-01')->first();
@@ -51,9 +54,10 @@ class Task1RelationalIntegrityTest extends TestCase
         $response = $this->post(route('activities.store'), [
             'code' => 'ACT-INVALID-CAT',
             'title' => 'Kegiatan Kategori Invalid',
-            'activity_date' => '2026-10-15',
+            'start_at' => '2026-10-15',
+            'end_at' => '2026-10-16',
+            'capacity' => 50,
             'category_id' => 99999, // ID tidak ada
-            'status' => 'Planned',
         ]);
 
         $response->assertSessionHasErrors('category_id');
@@ -73,9 +77,10 @@ class Task1RelationalIntegrityTest extends TestCase
         $response = $this->post(route('activities.store'), [
             'code' => $existing->code, // Menggunakan kode yang sudah ada
             'title' => 'Kegiatan Kode Duplikat',
-            'activity_date' => '2026-10-15',
+            'start_at' => '2026-10-15',
+            'end_at' => '2026-10-16',
+            'capacity' => 50,
             'category_id' => $category->id,
-            'status' => 'Planned',
         ]);
 
         $response->assertSessionHasErrors('code');
@@ -91,9 +96,10 @@ class Task1RelationalIntegrityTest extends TestCase
         $response = $this->put(route('activities.update', $activity), [
             'code' => $activity->code, // Kode tetap sama
             'title' => 'Judul Baru Setelah Update',
-            'activity_date' => $activity->activity_date->format('Y-m-d'),
+            'start_at' => $activity->start_at->format('Y-m-d'),
+            'end_at' => $activity->end_at->format('Y-m-d'),
+            'capacity' => $activity->capacity,
             'category_id' => $activity->category_id,
-            'status' => $activity->status,
         ]);
 
         $response->assertSessionHasNoErrors();

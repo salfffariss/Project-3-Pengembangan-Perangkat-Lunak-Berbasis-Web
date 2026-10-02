@@ -16,12 +16,17 @@ class ActivityController extends Controller
 {
     public function index(Request $request): View
     {
-        $activities = Activity::query()
-            ->filterStatus($request->query('status'))
-            ->orderBy('activity_date', 'asc')
-            ->get();
+        $categories = Category::orderBy('name')->get();
 
-        return view('activities.index', compact('activities'));
+        $activities = Activity::query()
+            ->search($request->query('search'))
+            ->filterCategory($request->query('category_id'))
+            ->filterStatus($request->query('status'))
+            ->sortByDate($request->query('sort'))
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('activities.index', compact('activities', 'categories'));
     }
 
     public function create(): View
@@ -38,7 +43,7 @@ class ActivityController extends Controller
         $activity = $service->create($request->validated());
 
         return redirect()->route('activities.show', $activity)
-            ->with('success', 'Kegiatan berhasil dibuat.');
+            ->with('success', 'Kegiatan berhasil dibuat dengan status Draft.');
     }
 
     public function show(Activity $activity): View
@@ -56,13 +61,11 @@ class ActivityController extends Controller
     public function update(
         UpdateActivityRequest $request,
         Activity $activity,
-        ActivityService $service // Gunakan service untuk update data
+        ActivityService $service
     ): RedirectResponse {
         try {
-            // Serahkan validasi aturan bisnis dan penyimpanan ke service
             $service->update($activity, $request->validated());
         } catch (DomainException $exception) {
-            // Jika status mencoba mundur, tangkap error dan kembalikan ke form
             return back()
                 ->withErrors(['status' => $exception->getMessage()])
                 ->withInput();
@@ -70,6 +73,32 @@ class ActivityController extends Controller
 
         return redirect()->route('activities.show', $activity)
             ->with('success', 'Kegiatan berhasil diperbarui.');
+    }
+
+    public function publish(
+        Activity $activity,
+        ActivityService $service
+    ): RedirectResponse {
+        try {
+            $service->publish($activity);
+
+            return back()->with('success', 'Kegiatan berhasil dipublikasikan.');
+        } catch (DomainException $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
+    }
+
+    public function complete(
+        Activity $activity,
+        ActivityService $service
+    ): RedirectResponse {
+        try {
+            $service->complete($activity);
+
+            return back()->with('success', 'Kegiatan berhasil diselesaikan.');
+        } catch (DomainException $exception) {
+            return back()->with('error', $exception->getMessage());
+        }
     }
 
     public function destroy(Activity $activity): RedirectResponse

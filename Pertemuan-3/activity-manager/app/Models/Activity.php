@@ -12,9 +12,17 @@ class Activity extends Model
         'code',
         'title',
         'description',
-        'activity_date',
+        'start_at',
+        'end_at',
+        'location',
+        'capacity',
         'category_id',
         'status',
+    ];
+
+    protected $attributes = [
+        'status' => 'draft',
+        'capacity' => 100,
     ];
 
     public function category(): BelongsTo
@@ -25,16 +33,42 @@ class Activity extends Model
     protected function casts(): array
     {
         return [
-            'activity_date' => 'date',
+            'start_at' => 'date',
+            'end_at' => 'date',
+            'capacity' => 'integer',
         ];
+    }
+
+    public function scopeSearch(Builder $query, ?string $keyword): Builder
+    {
+        return $query->when($keyword, function (Builder $q, string $keyword) {
+            $q->where(function (Builder $sub) use ($keyword) {
+                $sub->where('code', 'like', "%{$keyword}%")
+                    ->orWhere('title', 'like', "%{$keyword}%");
+            });
+        });
+    }
+
+    public function scopeFilterCategory(Builder $query, ?string $categoryId): Builder
+    {
+        return $query->when($categoryId, function (Builder $q, $id) {
+            $q->where('category_id', $id);
+        });
     }
 
     public function scopeFilterStatus(Builder $query, ?string $status): Builder
     {
-        $validStatuses = ['Planned', 'Ongoing', 'Done'];
+        $validStatuses = ['draft', 'published', 'completed'];
 
         return $query->when(in_array($status, $validStatuses, true), function (Builder $q) use ($status) {
             $q->where('status', $status);
         });
+    }
+
+    public function scopeSortByDate(Builder $query, ?string $sort): Builder
+    {
+        $direction = strtolower($sort ?? '') === 'oldest' ? 'asc' : 'desc';
+
+        return $query->orderBy('start_at', $direction);
     }
 }
