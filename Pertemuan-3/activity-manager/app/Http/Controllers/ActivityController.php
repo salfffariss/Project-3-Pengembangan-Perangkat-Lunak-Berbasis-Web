@@ -18,7 +18,7 @@ class ActivityController extends Controller
     {
         $categories = Category::orderBy('name')->get();
 
-        $activities = Activity::query()
+        $activities = Activity::with('category')
             ->search($request->query('search'))
             ->filterCategory($request->query('category_id'))
             ->filterStatus($request->query('status'))
@@ -106,6 +106,25 @@ class ActivityController extends Controller
         $activity->delete();
 
         return redirect()->route('activities.index')
-            ->with('success', 'Kegiatan berhasil dihapus.');
+            ->with('success', "Kegiatan '{$activity->title}' berhasil dipindahkan ke sampah.");
+    }
+
+    public function trash(): View
+    {
+        $activities = Activity::onlyTrashed()
+            ->with('category')
+            ->latest('deleted_at')
+            ->paginate(10);
+
+        return view('activities.trash', compact('activities'));
+    }
+
+    public function restore(int $id): RedirectResponse
+    {
+        $activity = Activity::onlyTrashed()->findOrFail($id);
+        $activity->restore();
+
+        return redirect()->route('activities.trash')
+            ->with('success', "Kegiatan '{$activity->title}' berhasil dipulihkan.");
     }
 }

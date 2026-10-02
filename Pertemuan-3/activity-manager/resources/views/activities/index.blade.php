@@ -3,7 +3,10 @@
 @section('content')
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <h1>Daftar Kegiatan</h1>
-        <a href="{{ route('activities.create') }}" class="btn">+ Tambah Kegiatan</a>
+        <div style="display: flex; gap: 8px;">
+            <a href="{{ route('activities.trash') }}" class="btn btn-secondary">Sampah Kegiatan</a>
+            <a href="{{ route('activities.create') }}" class="btn">+ Tambah Kegiatan</a>
+        </div>
     </div>
 
     <!-- Filter & Pencarian (Task 2) -->
