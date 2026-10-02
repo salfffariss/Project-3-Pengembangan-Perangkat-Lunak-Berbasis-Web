@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,5 +13,6 @@ Route::get('activities/trash', [ActivityController::class, 'trash'])->name('acti
 Route::post('activities/{id}/restore', [ActivityController::class, 'restore'])->name('activities.restore');
 Route::post('activities/{activity}/publish', [ActivityController::class, 'publish'])->name('activities.publish');
 Route::post('activities/{activity}/complete', [ActivityController::class, 'complete'])->name('activities.complete');
+Route::post('activities/{activity}/register', [RegistrationController::class, 'store'])->name('activities.register');
 Route::resource('activities', ActivityController::class);
 Route::resource('categories', CategoryController::class)->only(['index', 'destroy']);

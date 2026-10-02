@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Activity extends Model
@@ -21,16 +22,23 @@ class Activity extends Model
         'capacity',
         'category_id',
         'status',
+        'registered_count',
     ];
 
     protected $attributes = [
         'status' => 'draft',
         'capacity' => 100,
+        'registered_count' => 0,
     ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function registrations(): HasMany
+    {
+        return $this->hasMany(Registration::class);
     }
 
     protected function casts(): array
@@ -39,6 +47,7 @@ class Activity extends Model
             'start_at' => 'date',
             'end_at' => 'date',
             'capacity' => 'integer',
+            'registered_count' => 'integer',
         ];
     }
 
