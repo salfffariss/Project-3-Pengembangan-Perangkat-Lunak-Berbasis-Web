@@ -29,40 +29,36 @@
     @enderror
 </div>
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-    <div class="form-group">
-        <label for="start_at">Tanggal Mulai</label>
-        <input id="start_at" name="start_at" type="date" value="{{ old('start_at', isset($activity->start_at) ? $activity->start_at->format('Y-m-d') : '') }}">
-        @error('start_at')
-            <p class="error">{{ $message }}</p>
-        @enderror
-    </div>
-
-    <div class="form-group">
-        <label for="end_at">Tanggal Selesai</label>
-        <input id="end_at" name="end_at" type="date" value="{{ old('end_at', isset($activity->end_at) ? $activity->end_at->format('Y-m-d') : '') }}">
-        @error('end_at')
-            <p class="error">{{ $message }}</p>
-        @enderror
-    </div>
+<div class="form-group">
+    <label for="start_at">Tanggal Mulai</label>
+    <input id="start_at" name="start_at" type="date" value="{{ old('start_at', isset($activity->start_at) ? $activity->start_at->format('Y-m-d') : '') }}">
+    @error('start_at')
+        <p class="error">{{ $message }}</p>
+    @enderror
 </div>
 
-<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px;">
-    <div class="form-group">
-        <label for="location">Lokasi Kegiatan</label>
-        <input id="location" name="location" type="text" value="{{ old('location', $activity->location ?? '') }}" placeholder="Contoh: Gedung D4, Lab Komputer">
-        @error('location')
-            <p class="error">{{ $message }}</p>
-        @enderror
-    </div>
+<div class="form-group">
+    <label for="end_at">Tanggal Selesai</label>
+    <input id="end_at" name="end_at" type="date" value="{{ old('end_at', isset($activity->end_at) ? $activity->end_at->format('Y-m-d') : '') }}">
+    @error('end_at')
+        <p class="error">{{ $message }}</p>
+    @enderror
+</div>
 
-    <div class="form-group">
-        <label for="capacity">Kapasitas (Peserta)</label>
-        <input id="capacity" name="capacity" type="number" min="1" max="500" value="{{ old('capacity', $activity->capacity ?? 100) }}">
-        @error('capacity')
-            <p class="error">{{ $message }}</p>
-        @enderror
-    </div>
+<div class="form-group">
+    <label for="location">Lokasi Kegiatan</label>
+    <input id="location" name="location" type="text" value="{{ old('location', $activity->location ?? '') }}" placeholder="Contoh: Gedung D4, Lab Komputer">
+    @error('location')
+        <p class="error">{{ $message }}</p>
+    @enderror
+</div>
+
+<div class="form-group">
+    <label for="capacity">Kapasitas (Peserta)</label>
+    <input id="capacity" name="capacity" type="number" min="1" max="500" value="{{ old('capacity', $activity->capacity ?? 100) }}">
+    @error('capacity')
+        <p class="error">{{ $message }}</p>
+    @enderror
 </div>
 
 <div class="form-group">

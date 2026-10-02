@@ -25,8 +25,8 @@
 <body>
     <main class="container">
         <nav style="display: flex; gap: 16px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #d1d5db;">
-            <a href="{{ route('activities.index') }}" style="{{ request()->routeIs('activities.*') ? 'text-decoration: underline;' : '' }}">📋 Daftar Kegiatan</a>
-            <a href="{{ route('categories.index') }}" style="{{ request()->routeIs('categories.*') ? 'text-decoration: underline;' : '' }}">🏷️ Master Kategori</a>
+            <a href="{{ route('activities.index') }}" style="{{ request()->routeIs('activities.*') ? 'text-decoration: underline;' : '' }}">Daftar Kegiatan</a>
+            <a href="{{ route('categories.index') }}" style="{{ request()->routeIs('categories.*') ? 'text-decoration: underline;' : '' }}">Master Kategori</a>
         </nav>
 
         @if (session('success'))
